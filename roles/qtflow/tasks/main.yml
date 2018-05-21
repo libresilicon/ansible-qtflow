@@ -8,7 +8,6 @@
   with_items:
     - cmake 
     - git  
-    - install 
     - qtbase5-dev 
     - qtbase5-dev-tools 
     - qttools5-dev-tools 

@@ -9,7 +9,9 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.box = "ubuntu/bionic64"
-
+  
+  config.vm.provision "shell", inline: "apt install -y python"
+  
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "install.yml"
   end
