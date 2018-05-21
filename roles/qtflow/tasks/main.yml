@@ -1,0 +1,58 @@
+---
+
+- name: Install all available dependencies
+  apt:
+    name: '{{ item }}'
+    state: latest
+    update_cache: True
+  with_items:
+    - cmake 
+    - git  
+    - install 
+    - qtbase5-dev 
+    - qtbase5-dev-tools 
+    - qttools5-dev-tools 
+    - qtscript-tools 
+    - python-all-dev 
+    - build-essential 
+    - qt5-default 
+    - bison 
+    - flex 
+    - qtbase5-private-dev 
+    - qtconnectivity5-dev 
+    - qtdeclarative5-dev 
+    - qtdeclarative5-dev-tools 
+    - qtconnectivity5-dev 
+    - qt5keychain-dev 
+    - qt5-style-plugins 
+    - libkf5texteditor-dev 
+    - libqt5svg5-dev 
+    - gettext 
+    - qttools5-dev 
+    - libqt5webkit5-dev 
+    - qtmultimedia5-dev 
+    - libqt5xmlpatterns5-dev
+  become: True
+  become_method: sudo
+
+- name: Clone qtflow
+  git:
+    repo: https://github.com/libresilicon/qtflow.git 
+    dest: "{{ ansible_env.HOME }}/qtflow"
+    recursive: True
+    clone: True
+    update: True
+
+- name: Create build directory
+  file:
+    name: "{{ ansible_env.HOME }}/qtflow/build"
+    state: directory
+
+- name: Build qtflow
+  shell: "cmake -DBUILD_FULL_EDA=ON BUILD_STAND_ALONE_BINARIES=ON .. && make -j"
+  args:
+    chdir: "{{ ansible_env.HOME }}/qtflow/build"
+    executable: "/bin/bash"
+
+
+
