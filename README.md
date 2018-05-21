@@ -16,6 +16,12 @@ This installs the vm and does ansible provisioning.
 To apply changes in Vagrantfile, like other OS version, please run:
 
 ```
+~/ansible-qtflow: vagrant reload
+```
+
+To apply changes in ansible, please run:
+
+```
 ~/ansible-qtflow: vagrant provision
 ```
 
